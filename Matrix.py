@@ -12,7 +12,6 @@ width = os.get_terminal_size().columns-1
 height = os.get_terminal_size().lines
 matrix = []
 headpoints = []
-snakes = []
 
 
 def create_snake(snake):
@@ -26,10 +25,10 @@ def create_snake(snake):
 def issue_snakes(headpoints, snake, width):
     points = []
     for i in range(len(headpoints)):
-        if headpoints[i][0] - len(snake) > 5:
+        if headpoints[i][0] - len(snake) < 5:
             points.append(headpoints[i][1])
     for i in range(random.randint(0, 4)):
-        new_point = 2*random.randint(0, width//2)
+        new_point = 2*random.randint(1, width//2)
         if new_point not in points:
             headpoints.append([0, new_point, create_snake(snake)])
     return headpoints
@@ -49,7 +48,7 @@ def change_snake(headpoints, snake):
     for x in range(len(headpoints)):
         for _ in range(random.randint(0, 2)):
             newchr = chr(random.randint(12448, 12543))
-            newpos = random.ranint(0, len(snake))
+            newpos = random.randint(0, len(snake)-2)
             headpoints[x][2][newpos][1] = newchr
     return headpoints
 
@@ -71,9 +70,11 @@ while True:
     width = os.get_terminal_size().columns-1
     height = os.get_terminal_size().lines
     headpoints = issue_snakes(headpoints, snake, width)
+    matrix=[]
     matrix = current_matrix(headpoints, height, snake)
     headpoints = move_snakes(headpoints, snake)
-    time.sleep(0.06)
+    headpoints = change_snake(headpoints, snake)
+    time.sleep(0.05)
     for i in matrix:
         sys.stdout.write(u"\u001b["+str(i[0])+";"+str(i[1])+"H")
         sys.stdout.write(i[2][0]+i[2][1])
