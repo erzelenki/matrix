@@ -4,9 +4,10 @@
     <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredIdentifiers">
         <list>
+          <option value="sys" />
+          <option value="os" />
           <option value="time" />
           <option value="random" />
-          <option value="os" />
         </list>
       </option>
     </inspection_tool>
