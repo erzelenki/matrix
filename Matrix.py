@@ -5,10 +5,15 @@ import time
 import os
 
 print("\u000c")
+
+#ANSI Escape characters color codes for 
 snake = (
 '0', '232', '233', '233', '233', '233', '234', '22', '22', '22', '28', '34', '34', '34', '34', '34', '34', '34', '34',
 '34', '34', '231')
+
 matrix = []
+
+#check the terminal window size
 wide = os.get_terminal_size().columns // 2
 high = os.get_terminal_size().lines
 headpoints = []
